@@ -39,7 +39,7 @@ public class MergeStringsAlt {
     //when length are equal
     //use one for loop
     //and combine output
-    //case 1: when lenths are equal
+    //case 1: when lengths are equal
     public static String mergeAlternately(String word1, String word2) {
         StringBuilder out = new StringBuilder(word1.length()+word2.length());
         if(word1.length() == word2.length())
