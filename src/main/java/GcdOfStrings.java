@@ -35,6 +35,32 @@ Constraints:
         1 <= str1.length, str2.length <= 1000
 str1 and str2 consist of English uppercase letters.*/
 public class GcdOfStrings {
+    public String gcdOfStrings1(String str1, String str2) {
+        String out = "";
+        //Step 1: Find the minimum length String
+        String minStr = str1;
+        String maxStr = str2;
+        int minLen = minStr.length();
+        int maxLen = maxStr.length();
+        if (str2.length() < str1.length()) {
+            minStr = str2;
+            maxStr = str1;
+            minLen = minStr.length();
+            maxLen = maxStr.length();
+        }
+        //Use Case 1: If bigger string is starting with smaller string
+        //using regionMatches to avoid creating new substring in startsWith
+        if (maxStr.regionMatches(0, minStr, 0, minLen)) {
+            out = minStr;//base case
+            if (minLen != maxLen) {
+                String remStr = maxStr.substring(minStr.length());
+                //Recursive call
+                out = gcdOfStrings(minStr, remStr);
+            }
+        }
+        return out;
+    }
+
     public String gcdOfStrings(String str1, String str2) {
         String out = "";
         //Step 1: Find the minimum length String
@@ -42,15 +68,14 @@ public class GcdOfStrings {
         String maxStr = str2;
         int minLen = minStr.length();
         int maxLen = maxStr.length();
-        if(str2.length() < str1.length())
-        {
+        if (str2.length() < str1.length()) {
             minStr = str2;
             maxStr = str1;
             minLen = minStr.length();
             maxLen = maxStr.length();
         }
         //Use Case 1: If bigger string is starting with smaller string
-        if(maxStr.startsWith(minStr)) {
+        if (maxStr.startsWith(minStr)) {
             out = minStr;
             //Logic to be added
             if (minLen != maxLen) {
@@ -63,14 +88,15 @@ public class GcdOfStrings {
                     } else {
                         out = "";
                     }
-                }
-                else {
+                } else {
                     //Recursion
                     out = gcdOfStrings(minStr, remStr);
                 }
             }
         }
         return out;
+
     }
 }
+
 
