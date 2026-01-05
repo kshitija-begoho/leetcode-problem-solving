@@ -24,39 +24,32 @@ public class CanPlaceFlowers {
     //version 2
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
         boolean canPlace = false;
-        int eligibleCount = 0;
-        if (flowerbed.length == 1) {
+        int length = flowerbed.length;
+        if (length == 1) {
             if (flowerbed[0] == 0) {
-                eligibleCount = 1;
+                n = 0;
             }
         }
-        else if(flowerbed.length > 1)
+        else if(length > 1)
         {
-            for (int i = 0; i < flowerbed.length; i++) {
-                //checking there are no adjacent flowers planted
-                if (i + 1 < flowerbed.length) {
-                    if (flowerbed[i] == 0 && flowerbed[i + 1] == 0 && (i == 0 || flowerbed[i - 1] == 0)) {
-                        eligibleCount = eligibleCount + 1;
+            for (int i = 0; i < length; i++) {
+                    //checking there are no adjacent flowers planted
+                    if (flowerbed[i] == 0 && (i== length-1 || flowerbed[i + 1] == 0) && (i == 0 || flowerbed[i - 1] == 0)) {
+                        n--;
                         i++;//skip next position as we have planted flower here
-                        if (eligibleCount == n) {
+                        if (n == 0) {
                             break;
                         }
                     }
-                } else if (i + 1 >= flowerbed.length) //last position
-                {
-                    if (flowerbed[i] == 0 && flowerbed[i - 1] == 0) {
-                        eligibleCount = eligibleCount + 1;
-                    }
-                }
-
             }
         }
-        if(eligibleCount >= n)
+        if(n <= 0)
         {
             canPlace = true;
         }
         return canPlace;
     }
+
     public boolean canPlaceFlowers_v2(int[] flowerbed, int n) {
 
         boolean canPlace = false;
